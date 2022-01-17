@@ -13,21 +13,26 @@ class AuthorServiceSpec extends Specification {
     SessionFactory sessionFactory
 
     private Long setupData() {
-        // TODO: Populate valid domain instances and return a valid ID
-        //new Author(...).save(flush: true, failOnError: true)
-        //new Author(...).save(flush: true, failOnError: true)
-        //Author author = new Author(...).save(flush: true, failOnError: true)
-        //new Author(...).save(flush: true, failOnError: true)
-        //new Author(...).save(flush: true, failOnError: true)
-        assert false, "TODO: Provide a setupData() implementation for this generated test suite"
-        //author.id
+        // Need to remove all data from tables just in case hibernate is already running.
+        // https://stackoverflow.com/questions/8160296/grails-delete-all-data-from-table-domain-class-i-e-deleteall
+        // Note even the deletes will be rolled backed.
+        Book.executeUpdate('delete from Book')
+        Author.executeUpdate('delete from Author')
+
+        // Add to the tables
+        Author testAuthor = new Author(name: "Test Author 0").save(flush: true, failOnError: true)
+        new Author(name: "Test Author 1").save(flush: true, failOnError: true)
+        new Author(name: "Test Author 2").save(flush: true, failOnError: true)
+        new Author(name: "Test Author 3").save(flush: true, failOnError: true)
+        new Author(name: "Test Author 4").save(flush: true, failOnError: true)
+        testAuthor.id
     }
 
     void "test get"() {
-        setupData()
+        Long authorId = setupData()
 
         expect:
-        authorService.get(1) != null
+        authorService.get(authorId) != null
     }
 
     void "test list"() {
@@ -38,7 +43,9 @@ class AuthorServiceSpec extends Specification {
 
         then:
         authorList.size() == 2
-        assert false, "TODO: Verify the correct instances are returned"
+        // assert false, "TODO: Verify the correct instances are returned"
+        authorList[0].name.contains("Test Author")
+        authorList[1].name.contains("Test Author")
     }
 
     void "test count"() {
@@ -64,8 +71,8 @@ class AuthorServiceSpec extends Specification {
 
     void "test save"() {
         when:
-        assert false, "TODO: Provide a valid instance to save"
-        Author author = new Author()
+        // assert false, "TODO: Provide a valid instance to save"
+        Author author = new Author(name: "Author").save(flush: true, failOnError: true)
         authorService.save(author)
 
         then:
