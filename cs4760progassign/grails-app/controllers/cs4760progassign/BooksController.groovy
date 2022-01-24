@@ -6,9 +6,7 @@ class BooksController {
 
         // Book.list() gets all Book instances from the database and puts them in a list.
         def bks = Book.listOrderByTitle()
-        def aus = Author.listOrderByName()
         def bkList=[]
-        def bksAuList = []
 
         // println outputs to console
         if(debugIndex){
@@ -17,19 +15,10 @@ class BooksController {
         }
 
         // Make a list of all books title and authors
-        for(int i=0; i < aus.size(); i++){
+        for(int i=0; i < bks.size(); i++){
             def bkAuthor = [:]
-            def bksMap = [:]
-            bkAuthor.put('author', aus[i].name)
-            for(int j=0; j<bks.size(); j++) {
-                if(Author.get(bks[j].authorId) == aus[i]) {
-                    bksAuList.add(bks[i].title)
-                }
-            }
-            bksMap.put("title1", bksAuList.get(0))
-            bksMap.put("title2", bksAuList.get(1))
-            bkAuthor.putAll(bksMap)
-            bksAuList.clear()
+            bkAuthor.put('title', bks[i].title)
+            bkAuthor.put('author', Author.get(bks[i].authorId).name)
             bkList.add(bkAuthor)
         }
         if(debugIndex){

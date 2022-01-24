@@ -2,3 +2,6 @@
 .navbar {
     background-color: blue;
 }
+ul {
+    padding-left: 10px;
+}

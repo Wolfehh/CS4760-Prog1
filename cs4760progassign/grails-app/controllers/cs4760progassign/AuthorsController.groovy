@@ -8,6 +8,7 @@ class AuthorsController {
         def bks = Book.listOrderByTitle()
         def aus = Author.listOrderByName()
         def bkList=[]
+        def bksAuList = []
 
         // println outputs to console
         if(debugIndex){
@@ -15,8 +16,20 @@ class AuthorsController {
             bks.each{ println it.title+" by "+Author.get(it.authorId).name}
         }
 
-        // Make a list of all books title and authors
-        for(int i=0; i < bks.size(); i++){
+        for(int i=0; i < aus.size(); i++){
+            def bkAuthor = [author:[:]]
+            def bksMap = [:]
+            bkAuthor.put('author', aus[i].name)
+            for(int j=0; j<bks.size(); j++) {
+                if(Author.get(bks[j].authorId).name == aus[i].name) {
+                    bksAuList.add(bks[j].title)
+                }
+            }
+            bksMap.put('title1', bksAuList.get(0))
+            bksMap.put('title2', bksAuList.get(1))
+            bkAuthor.put('books',bksMap)
+            bkList.add(bkAuthor)
+            bksAuList.clear()
         }
         if(debugIndex){
             println " "

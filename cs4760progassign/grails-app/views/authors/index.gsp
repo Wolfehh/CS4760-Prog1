@@ -10,7 +10,10 @@
 <ul>
     <g:each in="${bkList}">
         <li> ${it.author} </li>
-        <li> ${it.title} </li>
+        <ul>
+        <li> ${it.books.title1}</li>
+        <li> ${it.books.title2}</li>
+        </ul>
     </g:each>
 </ul>
 </body>
