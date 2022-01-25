@@ -13,7 +13,8 @@ class AuthorsController {
         // println outputs to console
         if(debugIndex){
             println ""
-            bks.each{ println it.title+" by "+Author.get(it.authorId).name}
+            aus.each{author -> println (author.name)
+                author.books.title.each{println("     "+it)}}
         }
 
         for(int i=0; i < aus.size(); i++){
@@ -25,8 +26,10 @@ class AuthorsController {
                     bksAuList.add(bks[j].title)
                 }
             }
-            bksMap.put('title1', bksAuList.get(0))
-            bksMap.put('title2', bksAuList.get(1))
+            for(int k=0; k<bksAuList.size(); k++) {
+                def key = 'title'+(k+1)
+                bksMap.put(key, bksAuList.get(k))
+            }
             bkAuthor.put('books',bksMap)
             bkList.add(bkAuthor)
             bksAuList.clear()

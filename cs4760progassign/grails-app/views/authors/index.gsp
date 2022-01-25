@@ -11,8 +11,9 @@
     <g:each in="${bkList}">
         <li> ${it.author} </li>
         <ul>
-        <li> ${it.books.title1}</li>
-        <li> ${it.books.title2}</li>
+            <g:each in="${it.books}" var="book">
+                <li>${book.value}</li>
+            </g:each>
         </ul>
     </g:each>
 </ul>
