@@ -19,6 +19,13 @@
         <ul class="navbar-nav mr-auto">
             <li class="nav-item"><g:link class="nav-link" controller="Books">Books</g:link></li>
             <li class="nav-item"><g:link class="nav-link" controller="Authors">Authors</g:link></li>
+        <ul class="navbar-nav ml-auto"></ul>
+            <sec:ifLoggedIn><li class="nav-item"><a class="nav-link" href="#"><sec:username/></a></li></sec:ifLoggedIn>
+            <li class="nav-item">
+                <sec:ifLoggedIn><g:link class="nav-link" controller="Logout">log out</g:link></sec:ifLoggedIn>
+                <sec:ifNotLoggedIn><g:link class="nav-link" controller="login" action="auth">Login</g:link></sec:ifNotLoggedIn>
+            </li>
+        </ul>
         </ul>
     </div>
 
