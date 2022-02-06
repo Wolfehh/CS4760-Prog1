@@ -9,7 +9,8 @@
 <h1> BOOKS </h1>
 <ul>
     <g:each in="${bkList}">
-        <li> ${it.title} by ${it.author} </li>
+        <li> ${it.book.title} by ${it.author} </li>
+        <img src="/cs4760progassign/book/showCover/${it.book.id}" class="img-thumbnail" alt="${it.book.title}">
     </g:each>
 </ul>
 </body>

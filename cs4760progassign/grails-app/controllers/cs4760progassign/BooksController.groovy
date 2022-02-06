@@ -17,7 +17,7 @@ class BooksController {
         // Make a list of all books title and authors
         for(int i=0; i < bks.size(); i++){
             def bkAuthor = [:]
-            bkAuthor.put('title', bks[i].title)
+            bkAuthor.put('book', bks[i])
             bkAuthor.put('author', Author.get(bks[i].authorId).name)
             bkList.add(bkAuthor)
         }

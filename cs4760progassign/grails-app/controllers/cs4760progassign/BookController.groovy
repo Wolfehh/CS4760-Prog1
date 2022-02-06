@@ -11,6 +11,19 @@ class BookController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
+    def debugCover = true
+    def showCover(){
+        println "In showCover"
+        if(debugCover){
+            println " "
+            println "In showCover"
+            println "params.id: "+params.id
+        }
+        def book = Book.get(params.id)
+        response.outputStream << book.cover
+        response.outputStream.flush()
+    }
+
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         respond bookService.list(params), model:[bookCount: bookService.count()]
